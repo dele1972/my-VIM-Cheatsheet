@@ -1,0 +1,173 @@
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+
+\input{docmeta} % provides '\myTitle', '\myVersionnumber', '\myGithublink', ...
+
+\documentclass[10pt]{article} % 10pt font size
+
+% packages
+    \usepackage[utf8]{inputenc} % Required for inputting international characters
+    \usepackage[T1]{fontenc} % Output font encoding for international characters
+    \usepackage{multicol,multirow} % Required for dynamically ordered column-layout
+    \usepackage[margin=1cm,landscape,a4paper]{geometry} % Page margins and orientation
+    \usepackage[dvipsnames]{xcolor} % Required for color customization
+                                    % (https://en.wikibooks.org/wiki/LaTeX/Colors)
+    \usepackage[ % This block contains information used to annotate the PDF
+            colorlinks=true,
+            urlcolor=NavyBlue,
+            pdftitle={\myTitle}, 
+            pdfauthor={\myAuthor}, 
+            pdfsubject={}, 
+            pdfkeywords={}
+        ]{hyperref}
+
+% add biblatex for citation
+    \usepackage[backend=biber,style=numeric,]{biblatex}
+    \addbibresource{cites.bib}
+
+\pagestyle{empty}
+
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+\setlength{\unitlength}{1mm} % Set the length that numerical units are measured in
+\setlength{\parindent}{0pt} % Stop paragraph indentation
+
+% define some custom layout by 'overriding' commands
+    \makeatletter   % refer '@' to Categorycode 11,
+                    % now it could be used as naming part of command sequences
+    % define 'section' layout:
+    \renewcommand{\section}{\@startsection{section}% name
+                                    {1}% level
+                                    {0mm}% indent
+                                    {2ex plus -.5ex minus -.2ex}% beforeskip
+                                    {1ex plus .2ex}% afterskip
+                                    {\color{WildStrawberry}\normalfont\Large\bfseries}% style
+                                    }
+    
+    % define 'subsection' layout:
+    \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                    {-2explus -.5ex minus -.2ex}%
+                                    {0.5ex plus .2ex}%
+                                    {\normalfont\normalsize\bfseries}}
+    
+    % define 'subsubsection' layout:
+    \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                    {-2ex plus -.5ex minus -.2ex}%
+                                    {1ex plus .2ex}%
+                                    {\normalfont\small\bfseries}}
+    \makeatother    % refer '@' back to Categorycode 12,
+                    % now it would be used as Textcharacter
+
+% define custom commands for an alternate layout of a command list
+    \renewcommand{\dots}{\ \dotfill{}\ } % Fills in the right amount of dots
+    \newcommand{\command}[2]{#1~\dotfill{}~#2\\} % Custom command for adding a dotted shorcut
+    \newcommand{\commandbl}[2]{#1~\hfill~#2\\} % Custom command for adding a shorcut with blanks
+
+% Custom command for alternate subsection titles
+    \newcommand{\sectiontitle}[1]{\paragraph{#1} \ \\  \medskip\hrule\medskip} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\mytitle}
+\begin{document}
+\raggedright
+\footnotesize
+
+% ----------------------------------------------------------------------- Title
+\begin{center}
+    \Large{\textbf{\myTitle}} \\
+    \Large{\normalsize Version \myVersionnumber} \\
+\end{center}
+\medskip
+
+% ----------------------------------------------------------------------- start multicol
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+These shortcuts and descriptions are almost get from the awesome guide: \textit{"Onramp to Vim"}\cite{onramp}. Another ressource to start with Vim is the online Version of the vimtutor\cite{onlinetut}.
+
+% ----------------------------------------------------------------------- motions
+% https://thoughtbot.com/upcase/videos/onramp-to-vim-motions-and-moving
+\section{Motions (nouns)}
+Motions are in the sense of movement.\\
+See Vim's help page for motions for a full listing: \texttt{:h motion}
+
+\medskip
+\subsection{Moving within a line}
+\command{\texttt{h}, \texttt{l}}{move left/right by character}
+\command{\texttt{w}}{move forward one (\textbf{w})ord}
+\command{\texttt{b}}{move to (\textbf{b})eginning of a word}
+\command{\texttt{e}}{move forward to the (\textbf{e})nd of a word}
+
+\medskip
+\subsection{Jumping within a line}
+\command{\texttt{f<char>}}{(\textbf{f})ind a character forward in a line and move to it}
+\command{\texttt{t<char>}}{find a character forward in a line and move un(\textbf{t})il it}
+\commandbl{}{(one character before)}
+\command{\texttt{F<char>}}{(\textbf{f})ind a character backward in a line and move to it}
+\command{\texttt{T<char>}}{find a character backward in a line and move un(\textbf{t})il it}
+\command{\texttt{;}}{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command}
+\command{\texttt{,}}{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command, but in opposite direction}
+
+\medskip
+\subsection{Moving between lines}
+\command{\texttt{j}, \texttt{k}}{move up/down one line}
+\command{\texttt{H}, \texttt{M}, \texttt{L}}{move (\textbf{H})igh, (\textbf{M})iddle, or (\textbf{L})ow within the viewport}
+\command{\texttt{/}}{search}
+\command{\texttt{n}}{repeat last search - (\textbf{n})ext}
+\command{\texttt{N}}{repeat last search in opposite direction}
+\command{\texttt{<ctrl>u}, \texttt{<ctrl>d}}{moves (\textbf{u})p or (\textbf{d})own half of a page}
+\command{\texttt{<NN>G}}{(\textbf{G})o to line number \textit{NN}}
+
+%\columnbreak
+
+
+% ----------------------------------------------------------------------- text-objects
+% ToDo: here i am - https://thoughtbot.com/upcase/videos/onramp-to-vim-command-language
+\section{Text Objects (nouns)}
+text objects allow you to run the command from anywhere inside the text object\\
+For a full listing, see \texttt{:h text-objects}
+
+
+% ----------------------------------------------------------------------- commands
+\section{Commands (verbs)}
+After pressing the key-mapping for a given command Vim will wait for you to identify the text you want the command to operate on. The simplest commands are made by simply repeating the operator a second time to act on the current line.\\
+For example, where \texttt{d} is the operator for "delete", \texttt{dd} will delete the whole line. Each of \texttt{yy}, \texttt{cc}, \texttt{>\@>}, \texttt{==} behave similarly.
+
+\medskip
+\command{\texttt{d}}{(\textbf{d})elete}
+\command{\texttt{c}}{(\textbf{c})hange}
+\command{\texttt{y}}{(\textbf{y})ank (copy)}
+\command{\texttt{v}}{(\textbf{v})isually select}
+\command{\texttt{>}, \texttt{<}}{indent, dedent}
+\command{\texttt{=}}{reformat (reindent, break long lines, etc.}
+
+\medskip
+\subsection{combination: Command + Motion}
+The following table shows some of the many variations of the delete operation you can build by combining the \texttt{d} operator mapping with a motion:
+
+\medskip
+\command{\texttt{dw}}{(\textbf{d})elete to the next (\textbf{w})ord}
+\command{\texttt{de}}{(\textbf{d})elete to to the (\textbf{e})nd of the \underline{current} word}
+\command{\texttt{d2e}}{(\textbf{d})elete to to the (\textbf{e})nd of the \underline{next} word}
+\command{\texttt{dj}}{(\textbf{d})elete down a line (current and one below)}
+\command{\texttt{dt)}}{(\textbf{d})elete forward un(\textbf{t})il closing paranthesis}
+\command{\texttt{d/world}}{(\textbf{d})elete up until the first search match for \textit{world}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ----------------------------------------------------------------------- Resources
+\printbibliography
+
+
+% ----------------------------------------------------------------------- Endnote
+\hrule\medskip
+\today ~ \myAuthor, \href{\myGithublink}{\myGithublink}
+
+\end{multicols}
+\end{document}
