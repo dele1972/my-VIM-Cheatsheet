@@ -74,7 +74,7 @@
 \raggedright
 \footnotesize
 
-% ----------------------------------------------------------------------- Title
+% ------------------------------------------------------------------------------------------------ TITLE
 \begin{center}
     \Large{\textbf{\myTitle}} \\
     \Large{\normalsize Version \myVersionnumber} \\
@@ -88,21 +88,22 @@
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
-These shortcuts and descriptions are almost get from the awesome guide: \textit{"Onramp to Vim"}\cite{onramp}. Another ressource to start with Vim is the online Version of the vimtutor\cite{onlinetut}.
+These shortcuts and descriptions are inspired by the awesome guide: \textit{"Onramp to Vim"}\cite{onramp}, an austrian talk script \textit{"Vim für Fortgeschrittene"}\cite{vim_advanced} and at least the \textit{"Vim Reference Manual"}\cite{vimref}. Another good ressource for starting with Vim is the online Version of the vimtutor\cite{onlinetut}.
 
-% ----------------------------------------------------------------------- motions
-% https://thoughtbot.com/upcase/videos/onramp-to-vim-motions-and-moving
+% ------------------------------------------------------------------------------------------------ MOTIONS
+\medskip
 \section{Motions (nouns)}
 Motions are in the sense of movement.\\
 See Vim's help page for motions for a full listing: \texttt{:h motion}
 
-\medskip
+% --------------------------------------------------------------------- Moving within a line
 \subsection{Moving within a line}
 \command{\texttt{h}, \texttt{l}}{move left/right by character}
 \command{\texttt{w}}{move forward one (\textbf{w})ord}
 \command{\texttt{b}}{move to (\textbf{b})eginning of a word}
 \command{\texttt{e}}{move forward to the (\textbf{e})nd of a word}
 
+% --------------------------------------------------------------------- Jumping within a line
 \medskip
 \subsection{Jumping within a line}
 \command{\texttt{f<char>}}{(\textbf{f})ind a character forward in a line and move to it}
@@ -113,6 +114,7 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \command{\texttt{;}}{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command}
 \command{\texttt{,}}{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command, but in opposite direction}
 
+% --------------------------------------------------------------------- Moving between lines
 \medskip
 \subsection{Moving between lines}
 \command{\texttt{j}, \texttt{k}}{move up/down one line}
@@ -123,22 +125,44 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \command{\texttt{<ctrl>u}, \texttt{<ctrl>d}}{moves (\textbf{u})p or (\textbf{d})own half of a page}
 \command{\texttt{<NN>G}}{(\textbf{G})o to line number \textit{NN}}
 
+% --------------------------------------------------------------------- Inserting text
+\medskip
+\subsection{Inserting text}
+\command{\texttt{a}}{(\textbf{a})ppend text after the cursor}
+\command{\texttt{A}}{(\textbf{a})ppend text at the end of the line}
+\command{\texttt{i}}{(\textbf{i})nsert text before the cursor}
+\command{\texttt{I}}{(\textbf{I})nsert text before the first non-blank in the line}
+\command{\texttt{o}}{(\textbf{o})pen a new line below the current line, append text}
+\command{\texttt{O}}{(\textbf{O})pen a new line above the current line, append text}
+
 %\columnbreak
 
-
-% ----------------------------------------------------------------------- text-objects
-% ToDo: here i am - https://thoughtbot.com/upcase/videos/onramp-to-vim-command-language
+% ------------------------------------------------------------------------------------------------ TEXT-OBJECTS
+\medskip
 \section{Text Objects (nouns)}
-text objects allow you to run the command from anywhere inside the text object\\
+Text objects allow you to run the command from anywhere inside the text object\\
 For a full listing, see \texttt{:h text-objects}
 
+\medskip
+\textbf{w}ord\\
+\command{\texttt{aw}}{(\textbf{a}) (\textbf{w})ord, \underline{includes} surrounding white space}
+\command{\texttt{iw}}{(\textbf{i})nner (\textbf{w})ord, does \underline{not include} surrounding white space}
 
-% ----------------------------------------------------------------------- commands
+\medskip
+Others: \texttt{[a|i]} +\\
+\command{\texttt{\textbf{s}}}{(\textbf{s})entence}
+\command{\texttt{\textbf{p}}}{(\textbf{p})arapgraph}
+\command{\texttt{\textbf{"}}}{"double quoted string"}
+\command{\texttt{\textbf{)}}}{(parenthesized block)}
+\command{\texttt{\textbf{t}}}{\texttt{\textbf{\scriptsize<h1>}}single (\textbf{t})ag\texttt{\textbf{\scriptsize</h1>}}}
+
+
+% ------------------------------------------------------------------------------------------------ COMMANDS
+\medskip
 \section{Commands (verbs)}
 After pressing the key-mapping for a given command Vim will wait for you to identify the text you want the command to operate on. The simplest commands are made by simply repeating the operator a second time to act on the current line.\\
 For example, where \texttt{d} is the operator for "delete", \texttt{dd} will delete the whole line. Each of \texttt{yy}, \texttt{cc}, \texttt{>\@>}, \texttt{==} behave similarly.
 
-\medskip
 \command{\texttt{d}}{(\textbf{d})elete}
 \command{\texttt{c}}{(\textbf{c})hange}
 \command{\texttt{y}}{(\textbf{y})ank (copy)}
@@ -146,12 +170,19 @@ For example, where \texttt{d} is the operator for "delete", \texttt{dd} will del
 \command{\texttt{>}, \texttt{<}}{indent, dedent}
 \command{\texttt{=}}{reformat (reindent, break long lines, etc.}
 
+
+% ------------------------------------------------------------------------------------------------ STRUCTURE
 \medskip
-\subsection{combination: Command + Motion}
+\section{The Structure of an Editing Command (sentence)}
+\begin{verbatim}
+    <number><command><text object or motion>
+\end{verbatim}
+
+\subsection{Examples: Command + Motion}
 The following table shows some of the many variations of the delete operation you can build by combining the \texttt{d} operator mapping with a motion:
 
 \medskip
-\command{\texttt{dw}}{(\textbf{d})elete to the next (\textbf{w})ord}
+\command{\texttt{dw}}{(\textbf{d})elete from current position to the next (\textbf{w})ord}
 \command{\texttt{de}}{(\textbf{d})elete to to the (\textbf{e})nd of the \underline{current} word}
 \command{\texttt{d2e}}{(\textbf{d})elete to to the (\textbf{e})nd of the \underline{next} word}
 \command{\texttt{dj}}{(\textbf{d})elete down a line (current and one below)}
