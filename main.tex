@@ -89,6 +89,8 @@
 \setlength{\columnsep}{2pt}
 
 These shortcuts and descriptions are inspired by the awesome guide: \textit{"Onramp to Vim"}\cite{onramp}, an austrian talk script \textit{"Vim für Fortgeschrittene"}\cite{vim_advanced} and at least the \textit{"Vim Reference Manual"}\cite{vimref}. Another good ressource for starting with Vim is the online Version of the vimtutor\cite{onlinetut}.
+To consolidate and improve your VIM knowledge, VimGolf \cite{vimgolf} is a very good game in the form of a competition.
+While this cheat sheet is a selection of commands for one page, there are many more online.\cite{vimcheat}
 
 % ------------------------------------------------------------------------------------------------ MOTIONS
 \medskip
@@ -124,6 +126,10 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \command{\texttt{N}}{repeat last search in opposite direction}
 \command{\texttt{<ctrl>u}, \texttt{<ctrl>d}}{moves (\textbf{u})p or (\textbf{d})own half of a page}
 \command{\texttt{<NN>G}}{(\textbf{G})o to line number \textit{NN}}
+\command{\texttt{<NN>gg}}{(\textbf{G})o to line number \textit{NN}}
+\command{\texttt{\%}}{move cursor to matching character}
+\commandbl{}{(default supported pairs: '()', '\{\}', '[]';}
+\commandbl{}{use :h matchpairs in vim for more info)}
 
 % --------------------------------------------------------------------- Inserting text
 \medskip
@@ -188,6 +194,44 @@ The following table shows some of the many variations of the delete operation yo
 \command{\texttt{dj}}{(\textbf{d})elete down a line (current and one below)}
 \command{\texttt{dt)}}{(\textbf{d})elete forward un(\textbf{t})il closing paranthesis}
 \command{\texttt{d/world}}{(\textbf{d})elete up until the first search match for \textit{world}}
+\command{\texttt{d\$}}{(\textbf{d})elete to (\textbf{\$}) end of line}
+
+
+% ------------------------------------------------------------------------------------------------ FOO
+\medskip
+\section{Foo}
+
+\subsection{bar 1}
+\command{\texttt{"+y\{motion\}}}{yank into the system clipboard register}
+\command{\texttt{"+p}}{paste from the system clipboard register}
+
+%\subsection{bar 2}
+\command{\texttt{<ctrl>r}}{redo}
+\command{\texttt{.}}{repeat last command}
+\command{\texttt{<ctrl>6}}{toggle last two Buffers}
+
+%\subsection{bar 3}
+\command{\texttt{:messages}}{startup errors}
+\command{\texttt{:changes}}{list of changes}
+
+\subsection{Search and replace}
+\command{\texttt{/<pattern>}}{search for \textit{pattern}}
+\command{\texttt{?<pattern>}}{search backward for \textit{pattern}}
+\command{\texttt{n}}{repeat search in same direction}
+\command{\texttt{N}}{repeat search in opposite direction}
+\command{\texttt{:\%s/<old>/<new>/g}}{replace all \textit{old} with \textit{new} throughout file}
+\command{\texttt{:\%s/<old>/<new>/gc}}{replace all \textit{old} with \textit{new} throughout file}
+\commandbl{}{with confirmations}
+\command{\texttt{:noh}}{nohighlight, removes the highlighting of search results}
+
+\subsection{(Book-)Marks}
+\command{\texttt{m<char>}}{set current position for (\textbf{m})ark \textit{char} within the file/buffer}
+\command{\texttt{m<CHAR>}}{set current position for (\textbf{m})ark \textit{CHAR} global}
+\command{\texttt{'<char>}}{jump to position of mark \textit{char} within the file/buffer}
+\command{\texttt{m<CHAR>}}{jump to buffer and position of mark \textit{CHAR}}
+\command{\texttt{:jump}}{list of jumps (:jumps?)}
+\command{\texttt{<ctrl>i}}{go to newer position in jump list}
+\command{\texttt{<ctrl>o}}{go to older position in jump list}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
