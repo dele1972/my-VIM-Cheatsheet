@@ -20,6 +20,8 @@
             pdfsubject={}, 
             pdfkeywords={}
         ]{hyperref}
+    \usepackage{luacolor} % Required to use the lua-ul \highLight command 
+    \usepackage{lua-ul} 
 
 % add biblatex for citation
     \usepackage[backend=biber,style=numeric,]{biblatex}
@@ -102,7 +104,7 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \subsection{Moving within a line}
 \command{\texttt{h}, \texttt{l}}{move left/right by character}
 \command{\texttt{w}}{move forward one (\textbf{w})ord}
-\command{\texttt{b}}{move to (\textbf{b})eginning of a word}
+\command{\highLight[Apricot]{\texttt{b}}}{\highLight[Apricot]{move to (\textbf{b})eginning of a word}}
 \command{\texttt{e}}{move forward to the (\textbf{e})nd of a word}
 
 % --------------------------------------------------------------------- Jumping within a line
@@ -113,7 +115,7 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \commandbl{}{(one character before)}
 \command{\texttt{F<char>}}{(\textbf{f})ind a character backward in a line and move to it}
 \command{\texttt{T<char>}}{find a character backward in a line and move un(\textbf{t})il it}
-\command{\texttt{;}}{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command}
+\command{\highLight[Apricot]{\texttt{;}}}{\highLight[Apricot]{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command}}
 \command{\texttt{,}}{repeat last \texttt{f}, \texttt{t}, \texttt{F}, or \texttt{T} command, but in opposite direction}
 
 % --------------------------------------------------------------------- Moving between lines
@@ -121,13 +123,12 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \subsection{Moving between lines}
 \command{\texttt{j}, \texttt{k}}{move up/down one line}
 \command{\texttt{H}, \texttt{M}, \texttt{L}}{move (\textbf{H})igh, (\textbf{M})iddle, or (\textbf{L})ow within the viewport}
-\command{\texttt{/}}{search}
-\command{\texttt{n}}{repeat last search - (\textbf{n})ext}
+\command{\highLight[Apricot]{\texttt{n}}}{\highLight[Apricot]{repeat last search - (\textbf{n})ext}}
 \command{\texttt{N}}{repeat last search in opposite direction}
-\command{\texttt{<ctrl>u}, \texttt{<ctrl>d}}{moves (\textbf{u})p or (\textbf{d})own half of a page}
+\command{\highLight[Apricot]{\texttt{<ctrl>u}, \texttt{<ctrl>d}}}{\highLight[Apricot]{moves (\textbf{u})p or (\textbf{d})own half of a page}}
 \command{\texttt{<NN>G}}{(\textbf{G})o to line number \textit{NN}}
 \command{\texttt{<NN>gg}}{(\textbf{G})o to line number \textit{NN}}
-\command{\texttt{\%}}{move cursor to matching character}
+\command{\highLight[Apricot]{\texttt{\%}}}{\highLight[Apricot]{move cursor to matching character}}
 \commandbl{}{(default supported pairs: '()', '\{\}', '[]';}
 \commandbl{}{use :h matchpairs in vim for more info)}
 
@@ -147,12 +148,12 @@ See Vim's help page for motions for a full listing: \texttt{:h motion}
 \medskip
 \section{Text Objects (nouns)}
 Text objects allow you to run the command from anywhere inside the text object\\
-For a full listing, see \texttt{:h text-objects}
+For a complete listing, see \texttt{: h text-objects}
 
 \medskip
 \textbf{w}ord\\
-\command{\texttt{aw}}{(\textbf{a}) (\textbf{w})ord, \underline{includes} surrounding white space}
-\command{\texttt{iw}}{(\textbf{i})nner (\textbf{w})ord, does \underline{not include} surrounding white space}
+\command{\texttt{\highLight[Apricot]{a}w}}{\highLight[Apricot]{(\textbf{a})round} (\textbf{w})ord, \highLight[Apricot]{\underline{includes} surrounding white space}}
+\command{\texttt{\highLight[Apricot]{i}w}}{\highLight[Apricot]{(\textbf{i})nner} (\textbf{w})ord, does \highLight[Apricot]{\underline{not include} surround white space}}
 
 \medskip
 Others: \texttt{[a|i]} +\\
@@ -166,7 +167,7 @@ Others: \texttt{[a|i]} +\\
 % ------------------------------------------------------------------------------------------------ COMMANDS
 \medskip
 \section{Commands (verbs)}
-After pressing the key-mapping for a given command Vim will wait for you to identify the text you want the command to operate on. The simplest commands are made by simply repeating the operator a second time to act on the current line.\\
+After pressing the key mapping for a given command, Vim will wait for you to identify the text on which the command should operate. The simplest commands are made by simply repeating the operator a second time to act on the current line.\\
 For example, where \texttt{d} is the operator for "delete", \texttt{dd} will delete the whole line. Each of \texttt{yy}, \texttt{cc}, \texttt{>\@>}, \texttt{==} behave similarly.
 
 \command{\texttt{d}}{(\textbf{d})elete}
@@ -185,7 +186,7 @@ For example, where \texttt{d} is the operator for "delete", \texttt{dd} will del
 \end{verbatim}
 
 \subsection{Examples: Command + Motion}
-The following table shows some of the many variations of the delete operation you can build by combining the \texttt{d} operator mapping with a motion:
+The following table shows some of the many variations of the delete operation that you can build by combining the \texttt{d} operator mapping with a motion:
 
 \medskip
 \command{\texttt{dw}}{(\textbf{d})elete from current position to the next (\textbf{w})ord}
@@ -206,9 +207,9 @@ The following table shows some of the many variations of the delete operation yo
 \command{\texttt{"+p}}{paste from the system clipboard register}
 
 %\subsection{bar 2}
-\command{\texttt{<ctrl>r}}{redo}
-\command{\texttt{.}}{repeat last command}
-\command{\texttt{<ctrl>6}}{toggle last two Buffers}
+\command{\highLight[Apricot]{\texttt{<ctrl>r}}}{\highLight[Apricot]{redo}}
+\command{\highLight[Apricot]{\texttt{.}}}{\highLight[Apricot]{repeat last command}}
+\command{\highLight[Apricot]{\texttt{<ctrl>6}}}{\highLight[Apricot]{toggle last two Buffers}}
 
 %\subsection{bar 3}
 \command{\texttt{:messages}}{startup errors}
@@ -217,18 +218,18 @@ The following table shows some of the many variations of the delete operation yo
 \subsection{Search and replace}
 \command{\texttt{/<pattern>}}{search for \textit{pattern}}
 \command{\texttt{?<pattern>}}{search backward for \textit{pattern}}
-\command{\texttt{n}}{repeat search in same direction}
+\command{\highLight[Apricot]{\texttt{n}}}{\highLight[Apricot]{repeat search in same direction}}
 \command{\texttt{N}}{repeat search in opposite direction}
-\command{\texttt{:\%s/<old>/<new>/g}}{replace all \textit{old} with \textit{new} throughout file}
+\command{\highLight[Apricot]{\texttt{:\%s/<old>/<new>/g}}}{\highLight[Apricot]{replace all \textit{old} with \textit{new} throughout file}}
 \command{\texttt{:\%s/<old>/<new>/gc}}{replace all \textit{old} with \textit{new} throughout file}
 \commandbl{}{with confirmations}
 \command{\texttt{:noh}}{nohighlight, removes the highlighting of search results}
 
 \subsection{(Book-)Marks}
-\command{\texttt{m<char>}}{set current position for (\textbf{m})ark \textit{char} within the file/buffer}
-\command{\texttt{m<CHAR>}}{set current position for (\textbf{m})ark \textit{CHAR} global}
-\command{\texttt{'<char>}}{jump to position of mark \textit{char} within the file/buffer}
-\command{\texttt{m<CHAR>}}{jump to buffer and position of mark \textit{CHAR}}
+\command{\texttt{m<char>}}{set current position for (\textbf{m})ark \textit{char} \underline{within} the file/buffer}
+\command{\highLight[Apricot]{\texttt{m<CHAR>}}}{\highLight[Apricot]{set current position for (\textbf{m})ark \textit{CHAR} \underline{global}}}
+\command{\texttt{'<char>}}{jump to position of mark \textit{char} \underline{within} the file/buffer}
+\command{\highLight[Apricot]{\texttt{m<CHAR>}}}{\highLight[Apricot]{jump to buffer and position of \underline{global} mark \textit{CHAR}}}
 \command{\texttt{:jump}}{list of jumps (:jumps?)}
 \command{\texttt{<ctrl>i}}{go to newer position in jump list}
 \command{\texttt{<ctrl>o}}{go to older position in jump list}
